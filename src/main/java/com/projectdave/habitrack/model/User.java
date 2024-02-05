@@ -1,15 +1,13 @@
 package com.projectdave.habitrack.model;
 
-import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
-@Data
 @Document("User")
 public class User {
     String id;
-    List<EventInstance> events;
+    List<EventModel> events;
 
     public String getId() {
         return id;
@@ -19,11 +17,11 @@ public class User {
         this.id = id;
     }
 
-    public List<EventInstance> getEvents() {
+    public List<EventModel> getEvents() {
         return events;
     }
 
-    public void setEvents(List<EventInstance> events) {
+    public void setEvents(List<EventModel> events) {
         this.events = events;
     }
 }

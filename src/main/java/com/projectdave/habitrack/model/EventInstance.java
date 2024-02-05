@@ -1,20 +1,26 @@
 package com.projectdave.habitrack.model;
 
-import lombok.Data;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.List;
-import java.util.Map;
+import java.time.LocalDate;
 
-@Data
-@Document("EventInstance")
+@Document("Event")
 public class EventInstance {
     @Id
     String id;
-    String title;
-    String colorValue;
-    List<String> tags;
+    LocalDate date;
+    String eventModelId;
+    String userId;
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
     public String getId() {
         return id;
@@ -24,37 +30,19 @@ public class EventInstance {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public LocalDate getDate() {
+        return date;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
-    public String getColorValue() {
-        return colorValue;
+    public String getEventModelId() {
+        return eventModelId;
     }
 
-    public void setColorValue(String colorValue) {
-        this.colorValue = colorValue;
+    public void setEventModelId(String eventModelId) {
+        this.eventModelId = eventModelId;
     }
-
-    public List<String> getTags() {
-        return tags;
-    }
-
-    public void setTags(List<String> tags) {
-        this.tags = tags;
-    }
-
-    public Map<String, Object> getStatsKvps() {
-        return statsKvps;
-    }
-
-    public void setStatsKvps(Map<String, Object> statsKvps) {
-        this.statsKvps = statsKvps;
-    }
-
-    Map<String, Object> statsKvps;
 }

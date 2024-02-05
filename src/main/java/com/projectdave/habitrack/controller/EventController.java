@@ -1,7 +1,7 @@
 package com.projectdave.habitrack.controller;
 
-import com.projectdave.habitrack.model.Event;
 import com.projectdave.habitrack.model.EventInstance;
+import com.projectdave.habitrack.model.EventModel;
 import com.projectdave.habitrack.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,9 +15,10 @@ public class EventController {
     EventService eventService;
 
     @PostMapping("/event")
-    public ResponseEntity<String> postEvent(@RequestBody Event event) {
+    @CrossOrigin(origins = "http://localhost:8080")
+    public ResponseEntity<String> postEvent(@RequestBody EventInstance eventInstance) {
         try {
-            String id = eventService.saveEvent(event);
+            String id = eventService.saveEvent(eventInstance);
             return ResponseEntity.ok(id);
         } catch (Exception ex) {
             return new ResponseEntity(HttpStatus.I_AM_A_TEAPOT);
@@ -25,8 +26,8 @@ public class EventController {
     }
 
     @GetMapping("/event/{id}")
-    @ResponseBody
-    public ResponseEntity<Event> getEvent(@PathVariable String id) {
+    @CrossOrigin(origins = "http://localhost:8080")
+    public ResponseEntity<EventInstance> getEvent(@PathVariable String id) {
         try {
             return ResponseEntity.ok(eventService.getEvent(id));
         } catch (Exception ex) {
@@ -34,19 +35,20 @@ public class EventController {
         }
     }
 
-    @PostMapping("/event/instance")
-    public ResponseEntity<String> postEventInstance(@RequestBody EventInstance eventInstance) {
+    @PostMapping("/event/model")
+    @CrossOrigin(origins = "http://localhost:8080")
+    public ResponseEntity<String> postEventInstance(@RequestBody EventModel eventModel) {
         try {
-            String id = eventService.saveEventInstance(eventInstance);
+            String id = eventService.saveEventInstance(eventModel);
             return ResponseEntity.ok(id);
         } catch (Exception ex) {
             return new ResponseEntity(HttpStatus.I_AM_A_TEAPOT);
         }
     }
 
-    @GetMapping("/event/instance/{id}")
-    @ResponseBody
-    public ResponseEntity<EventInstance> getEventInstance(@PathVariable String id) {
+    @GetMapping("/event/model/{id}")
+    @CrossOrigin(origins = "http://localhost:8080")
+    public ResponseEntity<EventModel> getEventInstance(@PathVariable String id) {
         try {
             return ResponseEntity.ok(eventService.getEventInstance(id));
         } catch (Exception ex) {
