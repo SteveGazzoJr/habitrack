@@ -37,7 +37,7 @@ public class EventController {
 
     @PostMapping("/event/model")
     @CrossOrigin(origins = "http://localhost:8080")
-    public ResponseEntity<String> postEventInstance(@RequestBody EventModel eventModel) {
+    public ResponseEntity<String> postEventModel(@RequestBody EventModel eventModel) {
         try {
             String id = eventService.saveEventInstance(eventModel);
             return ResponseEntity.ok(id);
@@ -48,7 +48,7 @@ public class EventController {
 
     @GetMapping("/event/model/{id}")
     @CrossOrigin(origins = "http://localhost:8080")
-    public ResponseEntity<EventModel> getEventInstance(@PathVariable String id) {
+    public ResponseEntity<EventModel> getEventModel(@PathVariable String id) {
         try {
             return ResponseEntity.ok(eventService.getEventInstance(id));
         } catch (Exception ex) {
