@@ -25,7 +25,7 @@ public class EventService {
     @Autowired
     UserRepository userRepository;
 
-    public String saveEvent(EventInstance eventInstance){
+    public String saveEventInstance(EventInstance eventInstance){
         if (isBlank(eventInstance.getId())) eventInstance.setId(UUID.randomUUID().toString());
         try {
             eventRepository.save(eventInstance);
@@ -35,11 +35,11 @@ public class EventService {
         }
     }
 
-    public EventInstance getEvent(String eventId) {
+    public EventInstance getEventInstance(String eventId) {
         return eventRepository.findById(eventId).orElseThrow(() -> new NotFoundException("Event not found"));
     }
 
-    public String saveEventInstance(EventModel eventModel){
+    public String saveEventModel(EventModel eventModel){
         if (isBlank(eventModel.getId())) eventModel.setId(UUID.randomUUID().toString());
         try {
             eventInstanceRepository.save(eventModel);
@@ -49,7 +49,7 @@ public class EventService {
         }
     }
 
-    public EventModel getEventInstance(String eventInstanceId) {
+    public EventModel getEventModel(String eventInstanceId) {
         return eventInstanceRepository.findById(eventInstanceId).orElseThrow(() -> new NotFoundException("Event instance not found"));
     }
 }
