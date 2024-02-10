@@ -1,5 +1,7 @@
 package com.projectdave.habitrack.service;
 
+import com.projectdave.habitrack.exception.InvalidParameterException;
+import com.projectdave.habitrack.exception.NotFoundException;
 import com.projectdave.habitrack.model.EventInstance;
 import com.projectdave.habitrack.model.EventModel;
 import com.projectdave.habitrack.repository.EventInstanceRepository;
@@ -29,13 +31,12 @@ public class EventService {
             eventRepository.save(eventInstance);
             return eventInstance.getId();
         } catch (Exception e) {
-            return null;
+            throw new InvalidParameterException(e.getMessage());
         }
     }
 
     public EventInstance getEvent(String eventId) {
-        //TODO - custom exception here to allow us to return better statuses
-        return eventRepository.findById(eventId).orElseThrow();
+        return eventRepository.findById(eventId).orElseThrow(() -> new NotFoundException("Event not found"));
     }
 
     public String saveEventInstance(EventModel eventModel){
@@ -49,7 +50,6 @@ public class EventService {
     }
 
     public EventModel getEventInstance(String eventInstanceId) {
-        //TODO - custom exception here to allow us to return better statuses
-        return eventInstanceRepository.findById(eventInstanceId).orElseThrow();
+        return eventInstanceRepository.findById(eventInstanceId).orElseThrow(() -> new NotFoundException("Event instance not found"));
     }
 }
