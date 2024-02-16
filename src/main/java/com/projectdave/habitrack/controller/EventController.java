@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class EventController {
 
@@ -35,5 +37,11 @@ public class EventController {
     @CrossOrigin(origins = "http://localhost:8080")
     public ResponseEntity<EventModel> getEventModel(@PathVariable String id) {
         return ResponseEntity.ok(eventService.getEventModel(id));
+    }
+
+    @GetMapping("/event/models")
+    @CrossOrigin(origins = "http://localhost:8080")
+    public ResponseEntity<List<EventModel>> getEventModelsByTitle(@RequestParam String title) {
+        return ResponseEntity.ok(eventService.getEventModelsByTitle(title));
     }
 }
