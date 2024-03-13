@@ -4,6 +4,7 @@ import com.projectdave.habitrack.model.EventInstance;
 import com.projectdave.habitrack.model.EventModel;
 import com.projectdave.habitrack.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,7 +31,7 @@ public class EventController {
     @PostMapping("/event/model")
     @CrossOrigin(origins = "http://localhost:8080")
     public ResponseEntity<String> postEventModel(@RequestBody EventModel eventModel) {
-        return ResponseEntity.ok(eventService.saveEventModel(eventModel));
+        return ResponseEntity.ok().body(eventService.saveEventModel(eventModel));
     }
 
     @GetMapping("/event/model/{id}")

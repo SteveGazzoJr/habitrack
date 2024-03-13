@@ -5,6 +5,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Document("Event")
 public class EventInstance {
@@ -13,6 +14,7 @@ public class EventInstance {
     LocalDate date;
     String eventModelId;
     String userId;
+    List<String> tags;
 
     public String getUserId() {
         return userId;
@@ -44,5 +46,13 @@ public class EventInstance {
 
     public void setEventModelId(String eventModelId) {
         this.eventModelId = eventModelId;
+    }
+
+    public List<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<String> tags) {
+        this.tags = tags;
     }
 }
