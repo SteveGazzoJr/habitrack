@@ -3,6 +3,8 @@ package com.projectdave.habitrack.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+
 @Document("EventModel")
 public class EventModel {
     @Id
@@ -10,6 +12,7 @@ public class EventModel {
     String title;
     String colorValue;
     String userId;
+    List<String> categories;
 
     public String getUserId() {
         return userId;
@@ -41,5 +44,13 @@ public class EventModel {
 
     public void setColorValue(String colorValue) {
         this.colorValue = colorValue;
+    }
+
+    public List<String> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<String> categories) {
+        this.categories = categories;
     }
 }
