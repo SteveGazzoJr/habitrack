@@ -23,8 +23,6 @@ public class EventService {
     EventModelRepository eventModelRepository;
     @Autowired
     EventInstanceRepository eventInstanceRepository;
-    @Autowired
-    UserRepository userRepository;
 
     public String saveEventInstance(EventInstance eventInstance){
         if (isBlank(eventInstance.getId())) eventInstance.setId(UUID.randomUUID().toString());

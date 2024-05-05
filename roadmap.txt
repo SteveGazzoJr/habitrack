@@ -1,0 +1,15 @@
+Implement auth backend
+    logins first
+    registration next
+        OTP to email or sms
+            no passwords, some idiot will use their bank password for this
+            and some other idiot (me) will build it in an insecure way
+    RBAC
+        as of rn, users can more or less self-manage by design
+        eventually the ability to add queries and things like that may necessitate an admin role
+            for now can be managed by me at the CLI
+
+Implement day rating
+    RatingModel
+    getUnratedDays
+    getRating
