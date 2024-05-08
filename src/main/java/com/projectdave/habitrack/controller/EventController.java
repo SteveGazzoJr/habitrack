@@ -3,6 +3,7 @@ package com.projectdave.habitrack.controller;
 import com.projectdave.habitrack.model.EventInstance;
 import com.projectdave.habitrack.model.EventModel;
 import com.projectdave.habitrack.service.EventService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,10 +11,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 public class EventController {
 
     @Autowired
-    EventService eventService;
+    private final EventService eventService;
 
     @PostMapping("/event")
     @CrossOrigin(origins = "http://localhost:8080")

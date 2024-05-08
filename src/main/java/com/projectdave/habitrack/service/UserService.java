@@ -1,33 +1,23 @@
 package com.projectdave.habitrack.service;
 
-import com.projectdave.habitrack.config.TwilioConfig;
 import com.projectdave.habitrack.exception.InvalidParameterException;
 import com.projectdave.habitrack.exception.NotFoundException;
 import com.projectdave.habitrack.model.ContactMethod;
 import com.projectdave.habitrack.model.Role;
 import com.projectdave.habitrack.model.User;
 import com.projectdave.habitrack.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
 @Component
+@RequiredArgsConstructor
 public class UserService {
 
     @Autowired
     private final UserRepository userRepository;
-
-    @Autowired
-    private final TwilioConfig twilioConfig;
-
-    public UserService(UserRepository userRepository, TwilioConfig twilioConfig) {
-        this.userRepository = userRepository;
-        this.twilioConfig = twilioConfig;
-    }
-
-    //TODO twilio 2fa send/verify
-
 
     public User save(User user) {
         validateUser(user);
@@ -49,9 +39,15 @@ public class UserService {
         if(isNullOrEmpty(user.getPreference())) {
             user.setPreference(ContactMethod.EMAIL);
         }
+        if(userRepository.existsByEmail(user.getEmail())) {
+            throw new InvalidParameterException("Email address is already registered: %s".formatted(user.getEmail()));
+        }
+        if(userRepository.existsByPhone(user.getPhone())) {
+            throw new InvalidParameterException("Phone number is already registered: %s".formatted(user.getPhone()));
+        }
     }
 
-    public User get(String id) {
+    public User getUser(String id) {
         return userRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("User not found for id %s".formatted(id)));
     }
