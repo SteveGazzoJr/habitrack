@@ -6,7 +6,8 @@ import com.projectdave.habitrack.model.ContactMethod;
 import com.projectdave.habitrack.model.User;
 import com.projectdave.habitrack.model.UserVerification;
 import com.projectdave.habitrack.repository.UserVerificationRepository;
-import lombok.RequiredArgsConstructor;
+import com.twilio.Twilio;
+import com.twilio.rest.api.v2010.account.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +16,6 @@ import java.util.Random;
 import java.util.UUID;
 
 @Component
-@RequiredArgsConstructor
 public class UserVerificationService {
 
     @Autowired
@@ -26,7 +26,22 @@ public class UserVerificationService {
     @Autowired
     private final TwilioConfig twilioConfig;
 
-    public void setVerificationCode(String userId) {
+
+
+    public UserVerificationService(UserVerificationRepository userVerificationRepository, UserService userService, TwilioConfig twilioConfig) {
+        this.userVerificationRepository = userVerificationRepository;
+        this.userService = userService;
+        this.twilioConfig = twilioConfig;
+        Twilio.init(twilioConfig.getAccount(), twilioConfig.getToken());
+    }
+
+    public void sendVerificationCode(String userId) {
+        Message message = Message.creator(
+                new com.twilio.type.PhoneNumber("+14128745155"),
+                new com.twilio.type.PhoneNumber(twilioConfig.getNumber()),
+                "Faerie I can text you from the computer")
+                .create();
+
         User user = userService.getUser(userId);
         Random random = new Random();
         UserVerification userVerification = new UserVerification();

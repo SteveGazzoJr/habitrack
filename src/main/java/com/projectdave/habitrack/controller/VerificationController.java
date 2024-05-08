@@ -1,6 +1,5 @@
 package com.projectdave.habitrack.controller;
 
-import com.projectdave.habitrack.model.User;
 import com.projectdave.habitrack.model.UserVerification;
 import com.projectdave.habitrack.service.UserVerificationService;
 import lombok.RequiredArgsConstructor;
@@ -20,8 +19,8 @@ public class VerificationController {
 
     @PostMapping("/verificationCode/send")
     @CrossOrigin(origins = "http://localhost:8080")
-    public ResponseEntity<Void> setVerificationCode(@RequestBody User user) {
-        userVerificationService.setVerificationCode(user.getId());
+    public ResponseEntity<Void> setVerificationCode(@RequestBody String user) {
+        userVerificationService.sendVerificationCode(user);
         return (ResponseEntity<Void>) ResponseEntity.ok();
     }
 
