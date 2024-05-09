@@ -16,13 +16,13 @@ public class UserController {
 
     @PostMapping("/user")
     @CrossOrigin(origins = "http://localhost:8080")
-    public ResponseEntity<User> postEvent(@RequestBody User user) {
+    public ResponseEntity<User> postUser(@RequestBody User user) {
         return ResponseEntity.ok(userService.save(user));
     }
 
     @GetMapping("/user/{id}")
     @CrossOrigin(origins = "http://localhost:8080")
-    public ResponseEntity<User> getEvent(@PathVariable String id) {
+    public ResponseEntity<User> getUser(@PathVariable String id) {
         return ResponseEntity.ok(userService.getUser(id));
     }
 

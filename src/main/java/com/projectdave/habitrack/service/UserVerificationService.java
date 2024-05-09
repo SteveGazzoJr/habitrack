@@ -36,12 +36,6 @@ public class UserVerificationService {
     }
 
     public void sendVerificationCode(String userId) {
-        Message message = Message.creator(
-                new com.twilio.type.PhoneNumber("+14128745155"),
-                new com.twilio.type.PhoneNumber(twilioConfig.getNumber()),
-                "Faerie I can text you from the computer")
-                .create();
-
         User user = userService.getUser(userId);
         Random random = new Random();
         UserVerification userVerification = new UserVerification();
@@ -50,6 +44,7 @@ public class UserVerificationService {
         userVerification.setUserId(user.getId());
         userVerification.setExpiration(LocalDateTime.now().plusMinutes(5));
         userVerificationRepository.save(userVerification);
+        sendVerificationCode(user);
     }
 
     public void verifyCode(UserVerification input) {
@@ -71,7 +66,13 @@ public class UserVerificationService {
             //email the code
         }
         else {
-            //text the code
+            Message.creator(
+                    new com.twilio.type.PhoneNumber("+14128745155"),
+                    new com.twilio.type.PhoneNumber(twilioConfig.getNumber()),
+                    userVerificationRepository.findByUserId(user.getId())
+                            .orElseThrow(() -> new VerificationException("Unable to find verification code"))
+                            .getVerificationCode())
+                    .create();
         }
     }
 }
