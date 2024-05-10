@@ -1,4 +1,6 @@
 Implement auth backend
+    figure out how to do JWTs with spring security
+        https://medium.com/@barbieri.santiago/basic-rest-api-security-with-spring-security-9f5d3a254af8
     logins first
     registration next
         OTP to email or sms

@@ -1,10 +1,10 @@
 package com.projectdave.habitrack.repository;
 
-import com.projectdave.habitrack.model.UserVerification;
+import com.projectdave.habitrack.model.UserVerificationEntity;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.Optional;
 
-public interface UserVerificationRepository extends MongoRepository<UserVerification, String> {
-    Optional<UserVerification> findByUserId(String userId);
+public interface UserVerificationRepository extends MongoRepository<UserVerificationEntity, String> {
+    Optional<UserVerificationEntity> findByUserId(String userId);
 }

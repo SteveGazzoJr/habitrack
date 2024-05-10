@@ -52,6 +52,11 @@ public class UserService {
                 .orElseThrow(() -> new NotFoundException("User not found for id %s".formatted(id)));
     }
 
+    public User getUserByEmail(String email) {
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new NotFoundException("User not found for email %s".formatted(email)));
+    }
+
     private boolean isNullOrEmpty(ContactMethod contactMethod) {
         return contactMethod == null || isNullOrEmpty(contactMethod.toString());
     }

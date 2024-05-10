@@ -6,7 +6,7 @@ import org.springframework.data.annotation.Id;
 import java.time.LocalDateTime;
 
 @Data
-public class UserVerification {
+public class UserVerificationEntity {
     @Id
     private String sessionId;
     private String userId;
