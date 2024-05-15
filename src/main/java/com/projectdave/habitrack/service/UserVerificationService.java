@@ -4,32 +4,43 @@ import com.projectdave.habitrack.config.TwilioConfig;
 import com.projectdave.habitrack.exception.VerificationException;
 import com.projectdave.habitrack.model.*;
 import com.projectdave.habitrack.repository.UserVerificationRepository;
+import com.projectdave.habitrack.util.JwtUtil;
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 
 import java.time.LocalDateTime;
 import java.util.Random;
 import java.util.UUID;
 
 @Component
+@Slf4j
 public class UserVerificationService {
 
     @Autowired
     private final UserVerificationRepository userVerificationRepository;
     @Autowired
     private final UserService userService;
-
     @Autowired
     private final TwilioConfig twilioConfig;
+    @Autowired
+    private final AuthenticationManager authenticationManager;
+    @Autowired
+    private final JwtUtil jwtUtil;
 
 
 
-    public UserVerificationService(UserVerificationRepository userVerificationRepository, UserService userService, TwilioConfig twilioConfig) {
+    public UserVerificationService(UserVerificationRepository userVerificationRepository, UserService userService, TwilioConfig twilioConfig, AuthenticationManager authenticationManager, JwtUtil jwtUtil) {
         this.userVerificationRepository = userVerificationRepository;
         this.userService = userService;
         this.twilioConfig = twilioConfig;
+        this.authenticationManager = authenticationManager;
+        this.jwtUtil = jwtUtil;
         Twilio.init(twilioConfig.getAccount(), twilioConfig.getToken());
     }
 
@@ -57,20 +68,28 @@ public class UserVerificationService {
         return user;
     }
 
-    public void verifyCode(CodeRequest input) {
+    public String verifyCode(CodeRequest input) {
         User user = userService.getUser(input.getUserId());
         UserVerificationEntity existingEntity = userVerificationRepository.findByUserId(user.getId())
                 .orElseThrow(() -> new VerificationException("Verification code not found for user: %s".formatted(user.getId())));
-
-        if (!existingEntity.getVerificationCode().equalsIgnoreCase(input.getCode())) {
-            throw new VerificationException("Verification code mismatch");
-        }
 
         if(existingEntity.getExpiration().isBefore(LocalDateTime.now())) {
             userVerificationRepository.delete(existingEntity);
             throw new VerificationException("Code expired, please request a new code to restart verification");
         }
 
+        if (!existingEntity.getVerificationCode().equalsIgnoreCase(input.getCode())) {
+            throw new VerificationException("Verification code mismatch");
+        }
+
+        //this part is fuckin' up
+        //https://medium.com/code-with-farhan/spring-security-jwt-authentication-authorization-a2c6860be3cf - the tutorial
+        //InternalAuthenticationServiceException: No value present - the error
+        Authentication authentication =
+                authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(input.getUserId(), input.getCode()));
+        String token = jwtUtil.createToken(user);
+
+        return token;
     }
 
     private void sendVerificationCode(User user, ContactMethod contactMethod) {

@@ -28,9 +28,8 @@ public class VerificationController {
 
     @PostMapping("/verificationCode/verify")
     @CrossOrigin(origins = "http://localhost:8080")
-    public ResponseEntity<Void> verify(@RequestBody CodeRequest codeRequest) {
-        userVerificationService.verifyCode(codeRequest);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<String> verify(@RequestBody CodeRequest codeRequest) {
+        return ResponseEntity.ok().body(userVerificationService.verifyCode(codeRequest));
     }
 
 }
