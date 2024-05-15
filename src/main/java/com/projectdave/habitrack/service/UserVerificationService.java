@@ -60,7 +60,7 @@ public class UserVerificationService {
         Random random = new Random();
         UserVerificationEntity userVerificationEntity = new UserVerificationEntity();
         userVerificationEntity.setSessionId(UUID.randomUUID().toString());
-        userVerificationEntity.setVerificationCode(String.valueOf(random.nextInt(10000)));
+        userVerificationEntity.setVerificationCode(String.format("%04d", random.nextInt(10000)));
         userVerificationEntity.setUserId(user.getId());
         userVerificationEntity.setExpiration(LocalDateTime.now().plusMinutes(5));
         userVerificationRepository.save(userVerificationEntity);
@@ -81,14 +81,10 @@ public class UserVerificationService {
         if (!existingEntity.getVerificationCode().equalsIgnoreCase(input.getCode())) {
             throw new VerificationException("Verification code mismatch");
         }
-
-        //this part is fuckin' up
-        //https://medium.com/code-with-farhan/spring-security-jwt-authentication-authorization-a2c6860be3cf - the tutorial
-        //InternalAuthenticationServiceException: No value present - the error
         Authentication authentication =
                 authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(input.getUserId(), input.getCode()));
         String token = jwtUtil.createToken(user);
-
+        userVerificationRepository.delete(existingEntity);
         return token;
     }
 
