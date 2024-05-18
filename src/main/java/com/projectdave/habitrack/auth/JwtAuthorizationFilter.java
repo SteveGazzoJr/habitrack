@@ -38,12 +38,10 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
                 filterChain.doFilter(request, response);
                 return;
             }
-            System.out.println("token : "+accessToken);
             Claims claims = jwtUtil.resolveClaims(request);
 
             if(claims != null & jwtUtil.validateClaims(claims)){
                 String id = claims.getSubject();
-                System.out.println("id : "+id);
                 Authentication authentication =
                         new UsernamePasswordAuthenticationToken(id,"",new ArrayList<>());
                 SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -59,5 +57,12 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
         }
         filterChain.doFilter(request, response);
+    }
+
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request)
+            throws ServletException {
+        String path = request.getRequestURI();
+        return path.startsWith("/user") || path.startsWith("/verificationCode");
     }
 }
