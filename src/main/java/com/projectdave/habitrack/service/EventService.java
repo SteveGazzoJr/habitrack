@@ -6,7 +6,6 @@ import com.projectdave.habitrack.model.EventInstance;
 import com.projectdave.habitrack.model.EventModel;
 import com.projectdave.habitrack.repository.EventModelRepository;
 import com.projectdave.habitrack.repository.EventInstanceRepository;
-import com.projectdave.habitrack.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -2,7 +2,6 @@ package com.projectdave.habitrack.controller;
 
 import com.projectdave.habitrack.model.CodeRequest;
 import com.projectdave.habitrack.model.User;
-import com.projectdave.habitrack.model.UserVerificationEntity;
 import com.projectdave.habitrack.model.InitiateVerificationRequest;
 import com.projectdave.habitrack.service.UserService;
 import com.projectdave.habitrack.service.UserVerificationService;
