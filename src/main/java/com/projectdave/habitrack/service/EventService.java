@@ -23,11 +23,11 @@ public class EventService {
     @Autowired
     EventInstanceRepository eventInstanceRepository;
 
-    public String saveEventInstance(EventInstance eventInstance){
+    public EventInstance saveEventInstance(EventInstance eventInstance){
         if (isBlank(eventInstance.getId())) eventInstance.setId(UUID.randomUUID().toString());
         try {
             eventInstanceRepository.save(eventInstance);
-            return eventInstance.getId();
+            return eventInstance;
         } catch (Exception e) {
             throw new InvalidParameterException(e.getMessage());
         }
@@ -37,11 +37,11 @@ public class EventService {
         return eventInstanceRepository.findById(eventId).orElseThrow(() -> new NotFoundException("Event instance not found"));
     }
 
-    public String saveEventModel(EventModel eventModel){
+    public EventModel saveEventModel(EventModel eventModel){
         if (isBlank(eventModel.getId())) eventModel.setId(UUID.randomUUID().toString());
         try {
             eventModelRepository.save(eventModel);
-            return eventModel.getId();
+            return eventModel;
         } catch (Exception e) {
             return null;
         }

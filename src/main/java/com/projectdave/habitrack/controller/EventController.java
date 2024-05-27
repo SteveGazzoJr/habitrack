@@ -19,7 +19,7 @@ public class EventController {
 
     @PostMapping("/event")
     @CrossOrigin(origins = "http://localhost:8080")
-    public ResponseEntity<String> postEvent(@RequestBody EventInstance eventInstance) {
+    public ResponseEntity<EventInstance> postEvent(@RequestBody EventInstance eventInstance) {
         return ResponseEntity.ok(eventService.saveEventInstance(eventInstance));
     }
 
@@ -31,7 +31,7 @@ public class EventController {
 
     @PostMapping("/event/model")
     @CrossOrigin(origins = "http://localhost:8080")
-    public ResponseEntity<String> postEventModel(@RequestBody EventModel eventModel) {
+    public ResponseEntity<EventModel> postEventModel(@RequestBody EventModel eventModel) {
         return ResponseEntity.ok().body(eventService.saveEventModel(eventModel));
     }
 
