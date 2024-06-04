@@ -56,11 +56,12 @@ public class UserVerificationService {
             }
         }
 
-
+        //TODO add env flag to disable random codes and instead set code to predetermined value
+        //so I don't end up signing my house over to Twilio
         Random random = new Random();
         UserVerificationEntity userVerificationEntity = new UserVerificationEntity();
         userVerificationEntity.setSessionId(UUID.randomUUID().toString());
-        userVerificationEntity.setVerificationCode(String.format("%04d", random.nextInt(10000)));
+        userVerificationEntity.setVerificationCode(twilioConfig.isTestEnv() ? "1234" : String.format("%04d", random.nextInt(10000)));
         userVerificationEntity.setUserId(user.getId());
         userVerificationEntity.setExpiration(LocalDateTime.now().plusMinutes(5));
         userVerificationRepository.save(userVerificationEntity);
@@ -89,6 +90,7 @@ public class UserVerificationService {
     }
 
     private void sendVerificationCode(User user, ContactMethod contactMethod) {
+        if (twilioConfig.isTestEnv()) return;
         String message = "Your code is %s. It will expire at %s";
         UserVerificationEntity userVerificationEntity = userVerificationRepository.findByUserId(user.getId())
                 .orElseThrow(() -> new VerificationException("Unable to find verification code"));

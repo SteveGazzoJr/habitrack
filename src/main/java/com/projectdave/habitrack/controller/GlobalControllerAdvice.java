@@ -2,6 +2,7 @@ package com.projectdave.habitrack.controller;
 
 import com.projectdave.habitrack.exception.InvalidParameterException;
 import com.projectdave.habitrack.exception.NotFoundException;
+import com.projectdave.habitrack.exception.TokenMismatchException;
 import com.projectdave.habitrack.exception.VerificationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,5 +29,11 @@ public class GlobalControllerAdvice {
     @ExceptionHandler(VerificationException.class)
     public ResponseEntity handleVerificationException(Exception ex) {
         return ResponseEntity.badRequest().body(ex.getMessage());
+    }
+
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    @ExceptionHandler(TokenMismatchException.class)
+    public ResponseEntity handleTokenMismatchException(Exception ex) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(ex.getMessage());
     }
 }

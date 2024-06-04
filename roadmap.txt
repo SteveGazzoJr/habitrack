@@ -11,6 +11,10 @@ Implement auth backend
         eventually the ability to add queries and things like that may necessitate an admin role
             for now can be managed by me at the CLI
 
+I think I want event models to have attached userIds
+    It was a neat idea to let everyone use everyone else's events
+    Users will likely have an expectation of privacy for *all* of their data
+
 Implement day rating
     RatingModel
     getUnratedDays

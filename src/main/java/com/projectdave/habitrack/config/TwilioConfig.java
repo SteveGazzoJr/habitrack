@@ -1,9 +1,11 @@
 package com.projectdave.habitrack.config;
 
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@Data
 public class TwilioConfig {
     @Value("${twilio.account}")
     private String account;
@@ -11,16 +13,6 @@ public class TwilioConfig {
     private String token;
     @Value("${twilio.number}")
     private String number;
-
-    public String getAccount() {
-        return account;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public String getNumber() {
-        return number;
-    }
+    @Value("${twilio.testEnv}")
+    private boolean testEnv;
 }
