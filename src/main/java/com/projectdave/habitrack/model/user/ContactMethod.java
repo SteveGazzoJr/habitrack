@@ -1,4 +1,4 @@
-package com.projectdave.habitrack.model;
+package com.projectdave.habitrack.model.user;
 
 public enum ContactMethod {
     SMS,

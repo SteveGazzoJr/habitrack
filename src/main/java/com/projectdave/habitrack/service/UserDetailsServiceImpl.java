@@ -1,7 +1,7 @@
 package com.projectdave.habitrack.service;
 
-import com.projectdave.habitrack.model.User;
-import com.projectdave.habitrack.model.UserVerificationEntity;
+import com.projectdave.habitrack.model.user.User;
+import com.projectdave.habitrack.model.login.UserVerificationEntity;
 import com.projectdave.habitrack.repository.UserRepository;
 import com.projectdave.habitrack.repository.UserVerificationRepository;
 import lombok.RequiredArgsConstructor;

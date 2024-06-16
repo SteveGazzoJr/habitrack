@@ -1,4 +1,4 @@
-package com.projectdave.habitrack.model;
+package com.projectdave.habitrack.model.user;
 
 import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;

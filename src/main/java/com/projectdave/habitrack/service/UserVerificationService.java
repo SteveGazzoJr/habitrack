@@ -2,7 +2,11 @@ package com.projectdave.habitrack.service;
 
 import com.projectdave.habitrack.config.TwilioConfig;
 import com.projectdave.habitrack.exception.VerificationException;
-import com.projectdave.habitrack.model.*;
+import com.projectdave.habitrack.model.login.CodeRequest;
+import com.projectdave.habitrack.model.login.InitiateVerificationRequest;
+import com.projectdave.habitrack.model.login.UserVerificationEntity;
+import com.projectdave.habitrack.model.user.ContactMethod;
+import com.projectdave.habitrack.model.user.User;
 import com.projectdave.habitrack.repository.UserVerificationRepository;
 import com.projectdave.habitrack.util.JwtUtil;
 import com.twilio.Twilio;

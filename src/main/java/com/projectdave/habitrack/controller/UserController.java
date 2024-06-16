@@ -1,6 +1,6 @@
 package com.projectdave.habitrack.controller;
 
-import com.projectdave.habitrack.model.User;
+import com.projectdave.habitrack.model.user.User;
 import com.projectdave.habitrack.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

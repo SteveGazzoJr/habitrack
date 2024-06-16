@@ -2,9 +2,9 @@ package com.projectdave.habitrack.service;
 
 import com.projectdave.habitrack.exception.InvalidParameterException;
 import com.projectdave.habitrack.exception.NotFoundException;
-import com.projectdave.habitrack.model.ContactMethod;
-import com.projectdave.habitrack.model.Role;
-import com.projectdave.habitrack.model.User;
+import com.projectdave.habitrack.model.user.ContactMethod;
+import com.projectdave.habitrack.model.user.Role;
+import com.projectdave.habitrack.model.user.User;
 import com.projectdave.habitrack.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

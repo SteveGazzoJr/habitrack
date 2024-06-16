@@ -1,6 +1,6 @@
 package com.projectdave.habitrack.repository;
 
-import com.projectdave.habitrack.model.UserVerificationEntity;
+import com.projectdave.habitrack.model.login.UserVerificationEntity;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.Optional;

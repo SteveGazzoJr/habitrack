@@ -1,5 +1,6 @@
-package com.projectdave.habitrack.model;
+package com.projectdave.habitrack.model.login;
 
+import com.projectdave.habitrack.model.user.ContactMethod;
 import lombok.Data;
 
 @Data

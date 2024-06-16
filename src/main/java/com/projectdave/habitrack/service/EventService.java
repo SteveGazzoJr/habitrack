@@ -2,8 +2,8 @@ package com.projectdave.habitrack.service;
 
 import com.projectdave.habitrack.exception.InvalidParameterException;
 import com.projectdave.habitrack.exception.NotFoundException;
-import com.projectdave.habitrack.model.EventInstance;
-import com.projectdave.habitrack.model.EventModel;
+import com.projectdave.habitrack.model.event.EventInstance;
+import com.projectdave.habitrack.model.event.EventModel;
 import com.projectdave.habitrack.repository.EventModelRepository;
 import com.projectdave.habitrack.repository.EventInstanceRepository;
 import org.springframework.beans.factory.annotation.Autowired;

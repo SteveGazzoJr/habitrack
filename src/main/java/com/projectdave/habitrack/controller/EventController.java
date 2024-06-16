@@ -1,8 +1,8 @@
 package com.projectdave.habitrack.controller;
 
 import com.projectdave.habitrack.exception.TokenMismatchException;
-import com.projectdave.habitrack.model.EventInstance;
-import com.projectdave.habitrack.model.EventModel;
+import com.projectdave.habitrack.model.event.EventInstance;
+import com.projectdave.habitrack.model.event.EventModel;
 import com.projectdave.habitrack.service.EventService;
 import com.projectdave.habitrack.util.JwtUtil;
 import lombok.RequiredArgsConstructor;

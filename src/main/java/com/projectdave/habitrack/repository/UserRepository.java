@@ -1,6 +1,6 @@
 package com.projectdave.habitrack.repository;
 
-import com.projectdave.habitrack.model.User;
+import com.projectdave.habitrack.model.user.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.Optional;

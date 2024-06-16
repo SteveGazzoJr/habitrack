@@ -17,5 +17,6 @@ I think I want event models to have attached userIds
 
 Implement day rating
     RatingModel
+        d
     getUnratedDays
     getRating

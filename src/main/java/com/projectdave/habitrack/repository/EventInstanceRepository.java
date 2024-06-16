@@ -1,6 +1,6 @@
 package com.projectdave.habitrack.repository;
 
-import com.projectdave.habitrack.model.EventInstance;
+import com.projectdave.habitrack.model.event.EventInstance;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;

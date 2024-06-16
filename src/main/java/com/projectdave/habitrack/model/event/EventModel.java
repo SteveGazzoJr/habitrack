@@ -1,4 +1,4 @@
-package com.projectdave.habitrack.model;
+package com.projectdave.habitrack.model.event;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;

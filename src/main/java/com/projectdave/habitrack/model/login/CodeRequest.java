@@ -1,4 +1,4 @@
-package com.projectdave.habitrack.model;
+package com.projectdave.habitrack.model.login;
 
 import lombok.Data;
 
